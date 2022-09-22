@@ -66,16 +66,16 @@ const CountryDetail = () => {
     const theme = useTheme();
     const history = useHistory();
 
-    console.log(state, 111);
-
     const [data, setData] = useState<any>();
     const [borders, setBorders] = useState<string[]>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             const { borders } = data;
+            if (!borders || borders.length === 0) {
+                return;
+            }
             fetchCountryByCode(borders).then((data) => {
                 console.log(data, "bbbb");
                 const names = data.map((item: any) => item.name.common);
